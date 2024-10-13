@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latent Semantic Analysis (LSA) Search Engine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Latent Semantic Analysis (LSA) Search Engine</h1>
+            <form method="POST">
+                <div class="field">
+                    <label class="label">Enter your query:</label>
+                    <div class="control">
+                        <input class="input" type="text" name="query" placeholder="Type something...">
+                    </div>
+                </div>
+                <div class="control">
+                    <button class="button is-link" type="submit">Search</button>
+                </div>
+            </form>
+
+            {% if results %}
+            <h2 class="title is-4">Results</h2>
+            <ul>
+                {% for doc_title, doc_content, similarity in results %}
+                <li>
+                    <strong>{{ doc_title }}</strong><br>
+                    {{ doc_content }}<br>
+                    <strong>Similarity:</strong> {{ similarity }}
+                </li>
+                <hr>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if graph %}
+            <h2 class="title is-4">Cosine Similarity of Top 5 Documents</h2>
+            <div>{{ graph | safe }}</div>
+            {% endif %}
+        </div>
+    </section>
+</body>
+</html>
